@@ -4,81 +4,82 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+; '(custom-safe-themes (quote ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
  '(inhibit-startup-screen t)
  '(org-agenda-files (quote ("~/Dropbox/org/English.org" "~/Dropbox/org/Journal.org" "~/Dropbox/org/Todo.org" "~/Dropbox/org/inbox.org")))
  '(org-startup-indented t)
  '(tool-bar-mode nil))
 
+;; color scheme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/custom-theme-directory/")
+(load-theme 'gruvbox t)
 
-	(add-to-list 'custom-theme-load-path "~/.emacs.d/custom-theme-directory/")
-	(load-theme 'gruvbox t)
-	(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-				 ("marmalade" . "http://marmalade-repo.org/packages/")
-				 ("melpa" . "http://melpa.milkbox.net/packages/")))
+;; package manager 
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			 ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 
-	;; setting for org============================================================
-	; turn on org-indented-mode and visual-line-mode 
-	
-	(add-hook 'org-mode-hook 'turn-on-visual-line-mode)
-	(setq-default cursor-type 'box)
-	(global-set-key "\C-ca" 'org-agenda)
-	;;set up capture
-	(setq org-directory "~/Dropbox/Org") 
-	(define-key global-map "\C-cc" 'org-capture)
-	(setq org-capture-templates 
-	     '(("t" "Todo" entry (file+headline (concat org-directory "/Todo.org") "Tasks")
-		"* TODO %?\nEntered on %U\n  %i\n %a") 
-	       ("j" "Journal" entry (file+datetree (concat org-directory "/Journal.org"))
-		 "* %?\nEntered on %U\n %\i\n")
-	       ("e" "English" entry (file+headline (concat org-directory "/English.org") "English")
-		"* %?\nEntered on %U\n %i\n")))
+;; setting for org
+; turn on org-indented-mode and visual-line-mode 
+(add-hook 'org-mode-hook 'turn-on-visual-line-mode)
+(setq-default cursor-type 'box)
+(global-set-key "\C-ca" 'org-agenda)
+;;set up capture
+(setq org-directory "~/Dropbox/Org") 
+(define-key global-map "\C-cc" 'org-capture)
+(setq org-capture-templates 
+     '(("t" "Todo" entry (file+headline (concat org-directory "/Todo.org") "Tasks")
+	"* TODO %?\nEntered on %U\n  %i\n %a") 
+       ("j" "Journal" entry (file+datetree (concat org-directory "/Journal.org"))
+	 "* %?\nEntered on %U\n %\i\n")
+       ("e" "English" entry (file+headline (concat org-directory "/English.org") "English")
+	"* %?\nEntered on %U\n %i\n")))
 
-	;; Set to the name of the file where new notes will be stored
-	(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
-	(setq org-mobile-inbox-for-pull "~/Dropbox/Org/inbox.org")
-	(setq org-mobile-files '("~/Dropbox/org"))
+;; Set to the name of the file where new notes will be stored
+(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+(setq org-mobile-inbox-for-pull "~/Dropbox/Org/inbox.org")
+(setq org-mobile-files '("~/Dropbox/org"))
 
-	;(load-file "~/.emacs.d/elpa/org-20140630/org-mobile.elc")
-	;(add-hook 'after-init-hook 'org-mobile-pull)
-	;(add-hook 'kill-emacs-hook 'org-mobile-push) 
+;(load-file "~/.emacs.d/elpa/org-20140630/org-mobile.elc")
+;(add-hook 'after-init-hook 'org-mobile-pull)
+;(add-hook 'kill-emacs-hook 'org-mobile-push) 
 
-	(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
-	(setq org-src-fontify-natively t)
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(setq org-src-fontify-natively t)
 
-	(add-to-list 'load-path "~/.emacs.d/elisp")
-	(require 'install)
-	
-	(require 'move-lines)
-	(move-lines-binding)
-	;(require 'tablature-mode.el)
+(add-to-list 'load-path "~/.emacs.d/elisp")
+(require 'install)
 
-	; show parenthesis indication
-	(show-paren-mode 1)
+(require 'move-lines)
+(move-lines-binding)
+;(require 'tablature-mode.el)
 
-	; flyspell
-	(setq ispell-program-name "aspell")
-	(setq ispell-dictionary "en_GB")
-	(add-to-list 'exec-path "/usr/local/bin")
+; show parenthesis indication
+(show-paren-mode 1)
 
-	;(add-hook 'org-mode-hook (lambda () (flyspell-mode 1) ))
-	;(add-hook 'org-mode-hook
-	;	  '(lambda()
-	;	     (org-defkey org-mode-map "\C-c[" 'undefined)
-	;	     (org-defkey org-mode-map "\C-c]" 'undefined)
-	;	     (org-defkey org-mode-map "\C-c;" 'undefined)
-	;	     (org-defkey org-mode-map "\C-c\C-x\C-q" 'undefined))
-	;	  'append)
+; flyspell
+(setq ispell-program-name "aspell")
+(setq ispell-dictionary "en_GB")
+(add-to-list 'exec-path "/usr/local/bin")
 
-	;(add-hook 'org-mode-hook
-	;	  '(lambda()
-	;	     (local-set-key (kbd "C-c M-o") 'bh/mail-subtree))
-	;	  'append)
-	;(defun bh/mail-subtree()
-	;  (interactive)
-	;  (org-mark-subtree)
-	;  (org-mime-subtree))
+;(add-hook 'org-mode-hook (lambda () (flyspell-mode 1) ))
+;(add-hook 'org-mode-hook
+;	  '(lambda()
+;	     (org-defkey org-mode-map "\C-c[" 'undefined)
+;	     (org-defkey org-mode-map "\C-c]" 'undefined)
+;	     (org-defkey org-mode-map "\C-c;" 'undefined)
+;	     (org-defkey org-mode-map "\C-c\C-x\C-q" 'undefined))
+;	  'append)
+
+;(add-hook 'org-mode-hook
+;	  '(lambda()
+;	     (local-set-key (kbd "C-c M-o") 'bh/mail-subtree))
+;	  'append)
+;(defun bh/mail-subtree()
+;  (interactive)
+;  (org-mark-subtree)
+;  (org-mime-subtree))
 
 	
 (custom-set-faces
