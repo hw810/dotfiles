@@ -7,6 +7,7 @@
 
 ;; org mode
 (add-hook 'org-mode-hook 'turn-on-visual-line-mode) ; turn on 'wrap'
+(add-hook 'org-mode-hook 'flyspell-mode);
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -111,22 +112,22 @@
  ;; If there is more than one, they won't work right.
  )
 
-;; install only when needed
-(defun install-if-needed (package)
-  (unless (package-installed-p package)
-    (package-install package)))
-
 ;; set up auto-complete for lisp mode
-(install-if-needed 'auto-complete)
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
 (ac-config-default)
+
+
 
 ;; python ide setup
 
 ;; when first package can Not be found, enable the following line
 ;; (package-refresh-contents)
 
+;; install only when needed
+(defun install-if-needed (package)
+  (unless (package-installed-p package)
+    (package-install package)))
 
 (setq to-install
       '(python-mode magit yasnippet jedi auto-complete autopair find-file-in-repository flycheck))
@@ -143,6 +144,7 @@
 (require 'yasnippet)
 (require 'flycheck)
 (global-flycheck-mode t)
+(setq flycheck-global-modes '(not org-mode))
 
 (global-set-key [f7] 'find-file-in-repository)
 
@@ -183,3 +185,4 @@
 (add-hook 'python-mode-hook 'auto-complete-mode)
 
 ;; python ide setup ends
+
