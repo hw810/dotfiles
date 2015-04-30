@@ -161,7 +161,7 @@
 (setq py-electric-colon-active t)
 (add-hook 'python-mode-hook 'autopair-mode)
 (add-hook 'python-mode-hook 'yas-minor-mode)
-
+(add-hook 'python-mode-hook 'auto-complete-mode)
 ;; ;; Jedi settings
 (require 'jedi)
 ;; It's also required to run "pip install --user jedi" and "pip
@@ -182,7 +182,16 @@
             (local-set-key (kbd "M-.") 'jedi:goto-definition)))
 
 
-(add-hook 'python-mode-hook 'auto-complete-mode)
+(setq py-shell-name "ipython")
+;(py-split-window-on-execute-off)
+(setq py-split-windows-on-execute-function 'split-window-horizontally)
 
 ;; python ide setup ends
+
+;;; .emacs ends here
+
+;; octave shell
+(setq inferior-octave ">> ")
+(put 'erase-buffer 'disabled nil)
+
 
